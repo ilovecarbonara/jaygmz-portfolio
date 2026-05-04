@@ -1,26 +1,72 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #eef4fb;
+  --foreground: #1f2933;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  cursor: url("/cursors/adwaita-default.svg") 8 8, default;
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: #3584e4;
+  color: #ffffff;
+}
+
+a,
+button,
+[role="button"] {
+  cursor: url("/cursors/adwaita-pointer.svg") 13 5, pointer;
+}
+
+button:disabled,
+[aria-disabled="true"] {
+  cursor: url("/cursors/adwaita-default.svg") 8 8, default;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  cursor: url("/cursors/adwaita-text.svg") 16 16, text;
+}
+
+.cursor-window-drag {
+  cursor: url("/cursors/adwaita-grab.svg") 16 16, grab;
+}
+
+.cursor-window-drag:active {
+  cursor: url("/cursors/adwaita-grabbing.svg") 16 16, grabbing;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(86, 102, 118, 0.36);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(53, 132, 228, 0.72);
 }
