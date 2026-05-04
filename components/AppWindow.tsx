@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { X } from "lucide-react";
+import { Minus, X } from "lucide-react";
 import type { ReactNode } from "react";
 import type { AppId } from "@/components/Desktop";
 
@@ -12,8 +12,10 @@ type AppWindowProps = {
 	title: string;
 	position: Position;
 	zIndex: number;
+	isMinimized: boolean;
 	children: ReactNode;
 	onClose: () => void;
+	onMinimize: () => void;
 	onFocus: () => void;
 	onPositionChange: (position: Position) => void;
 };
@@ -34,8 +36,10 @@ export default function AppWindow({
 	title,
 	position,
 	zIndex,
+	isMinimized,
 	children,
 	onClose,
+	onMinimize,
 	onFocus,
 	onPositionChange,
 }: AppWindowProps) {
@@ -55,7 +59,8 @@ export default function AppWindow({
 		<motion.section
 			role="dialog"
 			aria-label={title}
-			className={`fixed left-0 top-0 flex max-h-[calc(100dvh-7.25rem)] min-h-90 ${windowWidth} ${windowHeight} ${surfaceClass} flex-col overflow-hidden rounded-xl border`}
+			aria-hidden={isMinimized}
+			className={`fixed left-0 top-0 flex max-h-[calc(100dvh-7.25rem)] min-h-90 ${windowWidth} ${windowHeight} ${surfaceClass} flex-col overflow-hidden rounded-xl border ${isMinimized ? "invisible pointer-events-none" : ""}`}
 			style={{ zIndex }}
 			initial="hidden"
 			animate={{ ...windowVariants.visible, x: position.x, y: position.y }}
@@ -82,7 +87,17 @@ export default function AppWindow({
 					>
 						<X className="h-2.5 w-2.5 opacity-0 transition-opacity hover:opacity-80" />
 					</button>
-					<span className="h-3.5 w-3.5 rounded-full bg-[#f6d32d]" />
+					<button
+						type="button"
+						aria-label={`Minimize ${title}`}
+						className="flex h-3.5 w-3.5 items-center justify-center rounded-full bg-[#f6d32d] text-[#1f2933] transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#3584e4]"
+						onClick={(event) => {
+							event.stopPropagation();
+							onMinimize();
+						}}
+					>
+						<Minus className="h-2.5 w-2.5 opacity-0 transition-opacity hover:opacity-80" />
+					</button>
 					<span className="h-3.5 w-3.5 rounded-full bg-[#33d17a]" />
 				</div>
 				<p className="min-w-0 flex-1 truncate text-center text-sm font-semibold">

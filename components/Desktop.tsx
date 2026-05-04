@@ -50,6 +50,7 @@ const initialZIndexMap: Record<AppId, number> = {
 
 export default function Desktop() {
 	const [openWindows, setOpenWindows] = useState<AppId[]>(["terminal"]);
+	const [minimizedWindows, setMinimizedWindows] = useState<AppId[]>([]);
 	const [zIndexMap, setZIndexMap] = useState<Record<AppId, number>>(initialZIndexMap);
 	const [positions, setPositions] = useState<Record<AppId, Position>>(initialPositions);
 	const [nextZIndex, setNextZIndex] = useState(2);
@@ -64,7 +65,12 @@ export default function Desktop() {
 
 	function openWindow(id: AppId) {
 		setOpenWindows((current) => (current.includes(id) ? current : [...current, id]));
+		setMinimizedWindows((current) => current.filter((windowId) => windowId !== id));
 		bringToFront(id);
+	}
+
+	function minimizeWindow(id: AppId) {
+		setMinimizedWindows((current) => (current.includes(id) ? current : [...current, id]));
 	}
 
 	function closeWindow(id: AppId) {
@@ -73,6 +79,7 @@ export default function Desktop() {
 		}
 
 		setOpenWindows((current) => current.filter((windowId) => windowId !== id));
+		setMinimizedWindows((current) => current.filter((windowId) => windowId !== id));
 	}
 
 	function updatePosition(id: AppId, position: Position) {
@@ -125,7 +132,9 @@ export default function Desktop() {
 							title={app.title}
 							position={positions[id]}
 							zIndex={zIndexMap[id]}
+							isMinimized={minimizedWindows.includes(id)}
 							onClose={() => closeWindow(id)}
+							onMinimize={() => minimizeWindow(id)}
 							onFocus={() => bringToFront(id)}
 							onPositionChange={(position) => updatePosition(id, position)}
 						>
