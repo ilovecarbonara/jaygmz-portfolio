@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const bootLines = [
-	"Starting Fedora portfolio session",
-	"Loading GNOME Shell",
-	"Applying blur effects",
-	"Opening Terminal",
-	"Welcome back, Jay",
+	"Adjusting the seat height...",
+	"Ran sudo dnf install more-ram...",
+	"Centering the last div...",
+	"Ran sudo dnf get-job-offer...",
+	"Session decrypted successfully.",
 ];
 
 export default function BootScreen() {
