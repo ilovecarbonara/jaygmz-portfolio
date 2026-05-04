@@ -2,7 +2,7 @@
 
 import { AnimatePresence } from "framer-motion";
 import { Cpu, FolderGit2, Mail, TerminalIcon, User } from "lucide-react";
-import type { ComponentType } from "react";
+import type { ComponentType, PointerEvent } from "react";
 import { useMemo, useState } from "react";
 import About from "@/apps/About";
 import Contact from "@/apps/Contact";
@@ -23,6 +23,11 @@ export type DesktopApp = {
 };
 
 type Position = { x: number; y: number };
+
+type SelectionBox = {
+	origin: Position;
+	current: Position;
+};
 
 const apps: DesktopApp[] = [
 	{ id: "terminal", title: "Terminal", icon: TerminalIcon },
@@ -55,6 +60,7 @@ export default function Desktop() {
 	const [positions, setPositions] = useState<Record<AppId, Position>>(initialPositions);
 	const [nextZIndex, setNextZIndex] = useState(2);
 	const [terminalIntroClosed, setTerminalIntroClosed] = useState(false);
+	const [selectionBox, setSelectionBox] = useState<SelectionBox | null>(null);
 
 	const appMap = useMemo(() => new Map(apps.map((app) => [app.id, app])), []);
 
@@ -96,6 +102,45 @@ export default function Desktop() {
 		}));
 	}
 
+	function startSelection(event: PointerEvent<HTMLDivElement>) {
+		if (event.button !== 0) {
+			return;
+		}
+
+		event.preventDefault();
+		event.currentTarget.setPointerCapture(event.pointerId);
+
+		const point = { x: event.clientX, y: event.clientY };
+		setSelectionBox({ origin: point, current: point });
+	}
+
+	function updateSelection(event: PointerEvent<HTMLDivElement>) {
+		if (!selectionBox) {
+			return;
+		}
+
+		setSelectionBox((current) =>
+			current ? { ...current, current: { x: event.clientX, y: event.clientY } } : current,
+		);
+	}
+
+	function endSelection(event: PointerEvent<HTMLDivElement>) {
+		if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+			event.currentTarget.releasePointerCapture(event.pointerId);
+		}
+
+		setSelectionBox(null);
+	}
+
+	const selectionStyle = selectionBox
+		? {
+				left: Math.min(selectionBox.origin.x, selectionBox.current.x),
+				top: Math.min(selectionBox.origin.y, selectionBox.current.y),
+				width: Math.abs(selectionBox.current.x - selectionBox.origin.x),
+				height: Math.abs(selectionBox.current.y - selectionBox.origin.y),
+			}
+		: null;
+
 	function renderApp(id: AppId) {
 		switch (id) {
 			case "terminal":
@@ -114,6 +159,20 @@ export default function Desktop() {
 	return (
 		<main className="relative h-dvh w-screen overflow-hidden text-[#1f2933]">
 			<div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/wallpaper.jpg')" }} />
+			<div
+				className="absolute inset-0 z-0 touch-none select-none"
+				onPointerDown={startSelection}
+				onPointerMove={updateSelection}
+				onPointerUp={endSelection}
+				onPointerCancel={endSelection}
+			>
+				{selectionStyle ? (
+					<div
+						className="pointer-events-none fixed rounded-[3px] border border-[#3584e4]/70 bg-[#3584e4]/18 shadow-[0_0_0_1px_rgba(255,255,255,0.35)_inset,0_8px_24px_rgba(53,132,228,0.18)] backdrop-blur-[1px]"
+						style={selectionStyle}
+					/>
+				) : null}
+			</div>
 			<TopBar />
 			<AnimatePresence>
 				{openWindows.map((id) => {
