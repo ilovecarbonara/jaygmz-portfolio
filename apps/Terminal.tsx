@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { FormEvent, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { AppId } from "@/components/Desktop";
 
 type TerminalProps = {
@@ -88,7 +88,7 @@ export default function Terminal({ onOpenWindow, mode }: TerminalProps) {
   const [history, setHistory] = useState<string[]>([]);
   const [input, setInput] = useState("");
   const [ready, setReady] = useState(mode === "shell");
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (mode === "shell") {
@@ -117,9 +117,9 @@ export default function Terminal({ onOpenWindow, mode }: TerminalProps) {
     return () => window.clearInterval(timer);
   }, [mode, startupLines]);
 
-  useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
-  }, [history]);
+  useLayoutEffect(() => {
+    scrollEndRef.current?.scrollIntoView({ block: "end" });
+  }, [history, ready]);
 
   function runCommand(rawCommand: string) {
     const command = rawCommand.trim().toLowerCase();
@@ -180,13 +180,14 @@ export default function Terminal({ onOpenWindow, mode }: TerminalProps) {
 
   return (
     <div className="flex h-full min-h-90 flex-col bg-[#111827]/90 p-4 font-mono text-[12px] text-[#edf6ff] sm:text-xs">
-      <div ref={scrollRef} className="min-h-0 flex-1 overflow-auto whitespace-pre leading-5">
+      <div className="min-h-0 flex-1 overflow-auto whitespace-pre leading-5">
         {history.map((line, index) => (
           <p key={`${line}-${index}`} className={line?.startsWith(prompt) ? "text-[#99c1f1]" : "text-[#edf6ff]"}>
             {line || " "}
           </p>
         ))}
         {!ready ? <span className="animate-pulse text-[#99c1f1]">█</span> : null}
+        <div ref={scrollEndRef} aria-hidden="true" />
       </div>
       {ready && mode === "shell" ? (
         <form onSubmit={handleSubmit} className="mt-3 flex shrink-0 items-center gap-2 border-t border-white/15 pt-3">

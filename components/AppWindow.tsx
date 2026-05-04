@@ -40,6 +40,7 @@ export default function AppWindow({
 	onPositionChange,
 }: AppWindowProps) {
 	const windowWidth = id === "terminal" ? "w-[min(1120px,calc(100vw-2rem))]" : "w-[min(640px,calc(100vw-2rem))]";
+	const windowHeight = id === "terminal" ? "h-[min(620px,calc(100dvh-7.25rem))]" : "";
 	const surfaceClass =
 		id === "terminal"
 		? "border-white/45 bg-[#111827]/75 text-[#eef4fb] shadow-[0_28px_80px_rgba(31,41,55,0.32)]"
@@ -48,13 +49,13 @@ export default function AppWindow({
 		id === "terminal"
 			? "border-white/10 bg-[#111827]/38 text-[#eef4fb]"
 			: "border-white/70 bg-white/62 text-[#1f2933]";
-	const bodyClass = id === "terminal" ? "bg-transparent" : "bg-white/72";
+	const bodyClass = id === "terminal" ? "overflow-hidden bg-transparent" : "overflow-auto bg-white/72";
 
 	return (
 		<motion.section
 			role="dialog"
 			aria-label={title}
-			className={`fixed left-0 top-0 flex max-h-[calc(100dvh-7.25rem)] min-h-[360px] ${windowWidth} ${surfaceClass} flex-col overflow-hidden rounded-xl border`}
+			className={`fixed left-0 top-0 flex max-h-[calc(100dvh-7.25rem)] min-h-[360px] ${windowWidth} ${windowHeight} ${surfaceClass} flex-col overflow-hidden rounded-xl border`}
 			style={{ zIndex }}
 			initial="hidden"
 			animate={{ ...windowVariants.visible, x: position.x, y: position.y }}
@@ -89,7 +90,7 @@ export default function AppWindow({
 				</p>
 				<div className="w-[52px]" />
 			</header>
-			<div className={`min-h-0 flex-1 overflow-auto ${bodyClass}`}>{children}</div>
+			<div className={`min-h-0 flex-1 ${bodyClass}`}>{children}</div>
 		</motion.section>
 	);
 }
