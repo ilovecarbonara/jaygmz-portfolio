@@ -36,7 +36,7 @@ export default function BootScreen() {
 
 	return (
 		<motion.div
-			className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#eef4fb] px-6 font-mono text-sm text-[#1f2933]"
+			className="fixed inset-0 z-9999 flex items-center justify-center bg-[#eef4fb] px-6 font-mono text-sm text-[#1f2933]"
 			initial={{ opacity: 1 }}
 			animate={{ opacity: visible ? 1 : 0 }}
 			transition={{ duration: 0.7, delay: visible ? 0 : 0.2 }}

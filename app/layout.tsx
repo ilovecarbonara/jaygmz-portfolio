@@ -13,7 +13,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Linux Desktop Portfolio",
+  title: "JayOS",
   description: "A Linux desktop-themed interactive portfolio.",
 };
 

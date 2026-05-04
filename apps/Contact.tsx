@@ -1,14 +1,12 @@
-import { Code2, Link, Mail } from "lucide-react";
+import { Code2, Gamepad2, Link, Mail, MessageCircle, Music2 } from "lucide-react";
 
 const links = [
-	{ label: "Email", value: "you@example.com", href: "mailto:you@example.com", icon: Mail },
-	{ label: "GitHub", value: "github.com/your-handle", href: "https://github.com/your-handle", icon: Code2 },
-	{
-		label: "LinkedIn",
-		value: "linkedin.com/in/your-handle",
-		href: "https://linkedin.com/in/your-handle",
-		icon: Link,
-	},
+	{ label: "Email", value: "jcalleine08@gmail.com", href: "mailto:jcalleine08@gmail.com", icon: Mail },
+	{ label: "GitHub", value: "ilovecarbonara", href: "https://github.com/ilovecarbonara", icon: Code2 },
+	{ label: "Instagram", value: "@jaygmzxcv", href: "https://instagram.com/jaygmzxcv", icon: Link },
+	{ label: "Spotify", value: "yanuzxcv", href: "https://open.spotify.com/user/w3r4q68bzjy3aawgk1e4nrnr8?si=29b09a2217b5440f", icon: Music2 },
+	{ label: "Discord", value: "doomfartslayer", href: "https://discord.com/users/954546298340659250", icon: MessageCircle },
+	{ label: "Steam", value: "papiyanu", href: "https://steamcommunity.com/profiles/76561198950743615/", icon: Gamepad2 },
 ];
 
 export default function Contact() {
@@ -17,6 +15,26 @@ export default function Contact() {
 			<div className="space-y-4">
 				{links.map((link) => {
 					const Icon = link.icon;
+					const content = (
+						<>
+							<Icon className="h-4 w-4 text-[#3584e4]" />
+							<span className="font-mono text-xs text-[#667085]">{link.label}</span>
+							<span className="min-w-0 wrap-break-word font-mono text-sm text-[#1c71d8] group-hover:underline">
+								{link.value}
+							</span>
+						</>
+					);
+
+					if (!link.href) {
+						return (
+							<div
+								key={link.label}
+								className="grid grid-cols-[1rem_5rem_1fr] items-center gap-3 rounded-md border border-transparent px-3 py-2"
+							>
+								{content}
+							</div>
+						);
+					}
 
 					return (
 						<a
@@ -24,20 +42,13 @@ export default function Contact() {
 							href={link.href}
 							target={link.href.startsWith("http") ? "_blank" : undefined}
 							rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-							className="grid grid-cols-[1rem_5rem_1fr] items-center gap-3 rounded-md border border-transparent py-2 transition-colors hover:border-[#d0d7de] hover:bg-white/70"
+							className="group grid grid-cols-[1rem_5rem_1fr] items-center gap-3 rounded-md border border-transparent px-3 py-2 transition-colors hover:border-[#d0d7de] hover:bg-white/70"
 						>
-							<Icon className="h-4 w-4 text-[#3584e4]" />
-							<span className="font-mono text-xs text-[#667085]">{link.label}</span>
-							<span className="min-w-0 wrap-break-word font-mono text-sm text-[#1c71d8] hover:underline">
-								{link.value}
-							</span>
+							{content}
 						</a>
 					);
 				})}
 			</div>
-			<p className="border-t border-[#d0d7de] pt-5 text-sm leading-relaxed text-[#384250]">
-				Currently open to freelance and full-time opportunities.
-			</p>
 		</section>
 	);
 }

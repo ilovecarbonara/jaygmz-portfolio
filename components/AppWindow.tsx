@@ -39,7 +39,7 @@ export default function AppWindow({
 	onFocus,
 	onPositionChange,
 }: AppWindowProps) {
-	const windowWidth = id === "terminal" ? "w-[min(1120px,calc(100vw-2rem))]" : "w-[min(640px,calc(100vw-2rem))]";
+	const windowWidth = id === "terminal" ? "w-[min(960px,calc(100vw-2rem))]" : "w-[min(640px,calc(100vw-2rem))]";
 	const windowHeight = id === "terminal" ? "h-[min(620px,calc(100dvh-7.25rem))]" : "";
 	const surfaceClass =
 		id === "terminal"
@@ -55,7 +55,7 @@ export default function AppWindow({
 		<motion.section
 			role="dialog"
 			aria-label={title}
-			className={`fixed left-0 top-0 flex max-h-[calc(100dvh-7.25rem)] min-h-[360px] ${windowWidth} ${windowHeight} ${surfaceClass} flex-col overflow-hidden rounded-xl border`}
+			className={`fixed left-0 top-0 flex max-h-[calc(100dvh-7.25rem)] min-h-90 ${windowWidth} ${windowHeight} ${surfaceClass} flex-col overflow-hidden rounded-xl border`}
 			style={{ zIndex }}
 			initial="hidden"
 			animate={{ ...windowVariants.visible, x: position.x, y: position.y }}
@@ -88,7 +88,7 @@ export default function AppWindow({
 				<p className="min-w-0 flex-1 truncate text-center text-sm font-semibold">
 					{title}
 				</p>
-				<div className="w-[52px]" />
+				<div className="w-13" />
 			</header>
 			<div className={`min-h-0 flex-1 ${bodyClass}`}>{children}</div>
 		</motion.section>

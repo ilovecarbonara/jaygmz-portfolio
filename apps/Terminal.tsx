@@ -22,7 +22,7 @@ const jayArt = [
 ];
 
 const jayInfo = [
-  "ilovecarbonara @ github",
+  "jaygmz@portfolio",
   "───────────────────────────────",
   "OS:        JayOS",
   "Host:      Cebu, PH",
@@ -33,7 +33,6 @@ const jayInfo = [
   "Backend:   Node.js · Supabase · PostgreSQL",
   "Tools:     Git · GitHub · Figma · Vercel · Hardhat",
   "Editor:    VS Code",
-  "Terminal:  GitHub README",
   "───────────────────────────────",
   "Focus:     Fullstack · UI",
   "Learning:  Linux · Python · Prompt Engineering · System Design · AWS",
@@ -41,22 +40,14 @@ const jayInfo = [
   "Playlist:  alt / indie rock · r&b / neo-soul · hip-hop / trap",
   "Into:      walking · lifting · music · manga / manhwa · films · games",
   "Fueled by: Coke Zero",
-  "Bugs:      [in denial]",
+  "Bugs:      no plz",
   "Status:    still compiling",
-];
-
-const contactsLines = [
-  "",
-  "  github   →  github.com/ilovecarbonara",
-  "  email    →  jcalleine08@gmail.com",
-  "  other    →  ig: jaygmzxcv · spotify: yanuzxcv · dc: doomfartslayer · steam: papiyanu",
 ];
 
 const commandHelp = [
   "Available commands:",
   "  help           List available commands",
   "  jayfetch       Print system profile",
-  "  cat contacts.txt",
   "  whoami         Print name and role",
   "  ls             List portfolio sections",
   "  clear          Clear terminal history",
@@ -69,17 +60,18 @@ const commandHelp = [
   "  open terminal  Focus terminal",
 ];
 
-const prompt = "jay@portfolio ~ %";
+const prompt = "jaygmz@portfolio ~ %";
 
 export default function Terminal({ onOpenWindow, mode }: TerminalProps) {
   const jayfetchLines = useMemo(() => {
     const maxLines = Math.max(jayArt.length, jayInfo.length);
+    const infoColumn = 46;
 
     return Array.from({ length: maxLines }, (_, index) => {
       const art = jayArt[index] ?? "";
       const info = jayInfo[index] ?? "";
 
-      return art ? `${art}        ${info}`.trimEnd() : `                                                 ${info}`.trimEnd();
+      return art ? `${art}        ${info}`.trimEnd() : `${" ".repeat(infoColumn)}${info}`.trimEnd();
     });
   }, []);
 
@@ -136,10 +128,8 @@ export default function Terminal({ onOpenWindow, mode }: TerminalProps) {
       output = commandHelp;
     } else if (command === "jayfetch") {
       output = ["", ...jayfetchLines];
-    } else if (command === "cat contacts.txt") {
-      output = contactsLines;
     } else if (command === "whoami") {
-      output = ["ilovecarbonara - fullstack · UI"];
+      output = ["Jc Alleine Gomez - Fullstack · UI"];
     } else if (command === "ls") {
       output = ["about  projects  skills  contact"];
     } else if (command === "pwd") {
@@ -187,25 +177,25 @@ export default function Terminal({ onOpenWindow, mode }: TerminalProps) {
           </p>
         ))}
         {!ready ? <span className="animate-pulse text-[#99c1f1]">█</span> : null}
+        {ready ? (
+          <form onSubmit={handleSubmit} className="flex items-center gap-2">
+            <label htmlFor="terminal-input" className="shrink-0 text-[#99c1f1]">
+              {prompt}
+            </label>
+            <input
+              id="terminal-input"
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+              className="min-w-0 flex-1 bg-transparent text-[#edf6ff] outline-none placeholder:text-[#9aa6b2]"
+              placeholder="type help"
+              autoComplete="off"
+              spellCheck={false}
+              autoFocus
+            />
+          </form>
+        ) : null}
         <div ref={scrollEndRef} aria-hidden="true" />
       </div>
-      {ready && mode === "shell" ? (
-        <form onSubmit={handleSubmit} className="mt-3 flex shrink-0 items-center gap-2 border-t border-white/15 pt-3">
-          <label htmlFor="terminal-input" className="shrink-0 text-[#99c1f1]">
-            {prompt}
-          </label>
-          <input
-            id="terminal-input"
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
-            className="min-w-0 flex-1 bg-transparent text-[#edf6ff] outline-none placeholder:text-[#9aa6b2]"
-            placeholder="type help"
-            autoComplete="off"
-            spellCheck={false}
-            autoFocus
-          />
-        </form>
-      ) : null}
     </div>
   );
 }
