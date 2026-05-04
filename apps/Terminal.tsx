@@ -5,6 +5,7 @@ import type { AppId } from "@/components/Desktop";
 
 type TerminalProps = {
   onOpenWindow: (id: AppId) => void;
+  mode: "intro" | "shell";
 };
 
 const jayArt = [
@@ -26,7 +27,7 @@ const jayInfo = [
   "OS:        JayOS",
   "Host:      Cebu, PH",
   "Uptime:    still counting",
-  "Shell:     bash",
+  "Shell:     zsh",
   "Languages: TypeScript · C# · Java · Solidity",
   "Frontend:  Next.js · React · Tailwind CSS",
   "Backend:   Node.js · Supabase · PostgreSQL",
@@ -63,10 +64,14 @@ const commandHelp = [
   "  open projects  Open Projects window",
   "  open skills    Open Skills window",
   "  open contact   Open Contact window",
+  "  pwd            Print working directory",
+  "  date           Print current date",
   "  open terminal  Focus terminal",
 ];
 
-export default function Terminal({ onOpenWindow }: TerminalProps) {
+const prompt = "jay@portfolio ~ %";
+
+export default function Terminal({ onOpenWindow, mode }: TerminalProps) {
   const jayfetchLines = useMemo(() => {
     const maxLines = Math.max(jayArt.length, jayInfo.length);
 
@@ -78,14 +83,18 @@ export default function Terminal({ onOpenWindow }: TerminalProps) {
     });
   }, []);
 
-  const startupLines = useMemo(() => ["$ jayfetch", "", ...jayfetchLines], [jayfetchLines]);
+  const startupLines = useMemo(() => [`${prompt} jayfetch`, "", ...jayfetchLines], [jayfetchLines]);
 
   const [history, setHistory] = useState<string[]>([]);
   const [input, setInput] = useState("");
-  const [ready, setReady] = useState(false);
+  const [ready, setReady] = useState(mode === "shell");
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (mode === "shell") {
+      return;
+    }
+
     let index = 0;
     const timer = window.setInterval(() => {
       if (index >= startupLines.length) {
@@ -106,7 +115,7 @@ export default function Terminal({ onOpenWindow }: TerminalProps) {
     }, 80);
 
     return () => window.clearInterval(timer);
-  }, [startupLines]);
+  }, [mode, startupLines]);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
@@ -120,7 +129,7 @@ export default function Terminal({ onOpenWindow }: TerminalProps) {
       return;
     }
 
-    const commandEcho = `$ ${rawCommand}`;
+    const commandEcho = `${prompt} ${rawCommand}`;
     let output: string[] = [];
 
     if (command === "help") {
@@ -133,6 +142,10 @@ export default function Terminal({ onOpenWindow }: TerminalProps) {
       output = ["ilovecarbonara - fullstack · UI"];
     } else if (command === "ls") {
       output = ["about  projects  skills  contact"];
+    } else if (command === "pwd") {
+      output = ["/Users/jay/portfolio"];
+    } else if (command === "date") {
+      output = [new Date().toString()];
     } else if (command === "open terminal") {
       output = ["terminal is already focused"];
       onOpenWindow("terminal");
@@ -143,12 +156,12 @@ export default function Terminal({ onOpenWindow }: TerminalProps) {
         onOpenWindow(target);
         output = [`opening ${target}...`];
       } else {
-        output = [`bash: command not found: ${rawCommand}`];
+        output = [`zsh: command not found: ${rawCommand}`];
       }
     } else if (command.length === 0) {
       output = [];
     } else {
-      output = [`bash: command not found: ${rawCommand}`];
+      output = [`zsh: command not found: ${rawCommand}`];
     }
 
     setHistory((current) => [...current, commandEcho, ...output]);
@@ -169,16 +182,16 @@ export default function Terminal({ onOpenWindow }: TerminalProps) {
     <div className="flex h-full min-h-90 flex-col bg-[#111827]/90 p-4 font-mono text-[12px] text-[#edf6ff] sm:text-xs">
       <div ref={scrollRef} className="min-h-0 flex-1 overflow-auto whitespace-pre leading-5">
         {history.map((line, index) => (
-          <p key={`${line}-${index}`} className={line?.startsWith("$") ? "text-[#99c1f1]" : "text-[#edf6ff]"}>
+          <p key={`${line}-${index}`} className={line?.startsWith(prompt) ? "text-[#99c1f1]" : "text-[#edf6ff]"}>
             {line || " "}
           </p>
         ))}
         {!ready ? <span className="animate-pulse text-[#99c1f1]">█</span> : null}
       </div>
-      {ready ? (
+      {ready && mode === "shell" ? (
         <form onSubmit={handleSubmit} className="mt-3 flex shrink-0 items-center gap-2 border-t border-white/15 pt-3">
-          <label htmlFor="terminal-input" className="text-[#99c1f1]">
-            $
+          <label htmlFor="terminal-input" className="shrink-0 text-[#99c1f1]">
+            {prompt}
           </label>
           <input
             id="terminal-input"

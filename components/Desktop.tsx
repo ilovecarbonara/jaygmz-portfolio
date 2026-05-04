@@ -53,6 +53,7 @@ export default function Desktop() {
 	const [zIndexMap, setZIndexMap] = useState<Record<AppId, number>>(initialZIndexMap);
 	const [positions, setPositions] = useState<Record<AppId, Position>>(initialPositions);
 	const [nextZIndex, setNextZIndex] = useState(2);
+	const [terminalIntroClosed, setTerminalIntroClosed] = useState(false);
 
 	const appMap = useMemo(() => new Map(apps.map((app) => [app.id, app])), []);
 
@@ -67,6 +68,10 @@ export default function Desktop() {
 	}
 
 	function closeWindow(id: AppId) {
+		if (id === "terminal") {
+			setTerminalIntroClosed(true);
+		}
+
 		setOpenWindows((current) => current.filter((windowId) => windowId !== id));
 	}
 
@@ -87,7 +92,7 @@ export default function Desktop() {
 	function renderApp(id: AppId) {
 		switch (id) {
 			case "terminal":
-				return <Terminal onOpenWindow={openWindow} />;
+				return <Terminal mode={terminalIntroClosed ? "shell" : "intro"} onOpenWindow={openWindow} />;
 			case "about":
 				return <About />;
 			case "projects":
