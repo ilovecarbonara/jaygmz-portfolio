@@ -31,16 +31,20 @@ export default function About() {
 				<div className="space-y-2">
 					<h2 className="text-xs uppercase tracking-widest text-[#3584e4]">Bio</h2>
 					<p className="text-justify text-sm leading-relaxed text-[#384250]">
-						I&apos;m a developer who loves building thoughtful web experiences with clean code, practical UX,
-						and a strong bias toward shipping. This desktop portfolio is designed to feel familiar,
-						inspectable, and a little playful without getting in the way.
+						I&apos;m a developer who works primarily through AI-assisted development —
+                        using AI as a core part of my workflow across all my projects. I try to go
+                        beyond just making things work by weaving in software engineering principles
+                        and security practices along the way. Still learning, but intentional about it.
 					</p>
 				</div>
 
 				<div className="space-y-2">
 					<h2 className="text-xs uppercase tracking-widest text-[#3584e4]">Currently</h2>
 					<p className="text-justify text-sm leading-relaxed text-[#384250]">
-						Open to freelance projects, product work, and teams that care about craft.
+                        Getting comfortable with Linux as a daily driver, using Python across my
+                        projects while still picking it up, practicing prompt engineering as part
+                        of my AI-assisted workflow, and studying system design to think bigger about
+                        how things fit together.
 					</p>
 				</div>
 			</div>
