@@ -41,7 +41,7 @@ export default function Projects() {
 						GitHub
 					</a>
 					<a
-						href="https://jayos.vercel.app"
+						href="https://jaygmz.vercel.app"
 						target="_blank"
 						rel="noreferrer"
 						className="inline-flex items-center gap-2 rounded-md border border-[#d0d7de] bg-white/70 px-3 py-2 font-mono text-sm text-[#1c71d8] transition-colors hover:bg-[#eaf4ff]"
