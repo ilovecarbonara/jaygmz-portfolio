@@ -112,10 +112,8 @@ export default function Desktop() {
 	}
 
 	return (
-		<main className="relative h-dvh w-screen overflow-hidden bg-[#dfeaf6] text-[#1f2933]">
-			<div className="absolute inset-0 bg-[linear-gradient(135deg,#f8fbff_0%,#dbeafe_32%,#8fc8ff_62%,#f5f7fb_100%)]" />
-			<div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(53,132,228,0.18),transparent_34%,rgba(255,255,255,0.42)_70%,rgba(120,172,224,0.18))]" />
-			<div className="pointer-events-none absolute inset-0 bg-white/12" />
+		<main className="relative h-dvh w-screen overflow-hidden text-[#1f2933]">
+			<div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/wallpaper.jpg')" }} />
 			<TopBar />
 			<AnimatePresence>
 				{openWindows.map((id) => {
