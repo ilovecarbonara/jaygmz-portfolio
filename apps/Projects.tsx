@@ -1,6 +1,13 @@
 import { Code2, ExternalLink } from "lucide-react";
+import { SiFramer, SiNextdotjs, SiTailwindcss, SiTypescript, SiVercel } from "react-icons/si";
 
-const techStack = ["Next.js", "TypeScript", "Tailwind", "Framer Motion"];
+const techStack = [
+	{ label: "Next.js", icon: <SiNextdotjs className="h-3.5 w-3.5" /> },
+	{ label: "TypeScript", icon: <SiTypescript className="h-3.5 w-3.5 text-[#3178c6]" /> },
+	{ label: "Tailwind", icon: <SiTailwindcss className="h-3.5 w-3.5 text-[#38bdf8]" /> },
+	{ label: "Framer Motion", icon: <SiFramer className="h-3.5 w-3.5" /> },
+	{ label: "Vercel", icon: <SiVercel className="h-3.5 w-3.5" /> },
+];
 
 export default function Projects() {
 	return (
@@ -23,9 +30,10 @@ export default function Projects() {
 				</div>
 
 				<div className="mt-5 flex flex-wrap gap-2">
-					{techStack.map((tech) => (
-						<span key={tech} className="rounded-md border border-[#d0d7de] bg-[#f6f8fb] px-2 py-0.5 font-mono text-xs text-[#384250]">
-							{tech}
+					{techStack.map(({ label, icon }) => (
+						<span key={label} className="inline-flex items-center gap-1.5 rounded-md border border-[#d0d7de] bg-white/70 px-3 py-1 font-mono text-xs text-[#384250] shadow-sm">
+							{icon}
+							{label}
 						</span>
 					))}
 				</div>
