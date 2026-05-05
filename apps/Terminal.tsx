@@ -44,6 +44,72 @@ const jayInfo = [
   "Status:    still compiling",
 ];
 
+const icecreamArt = [
+  "⣿⣿⣿⣿⣿⣿⡿⠛⠋⠉⠄⠄⠄⠄⠄⠄⠄⠄⠄⠈⠉⠛⠿⣿⣿⣿⣿⣿⣿⣿",
+  "⣿⣿⣿⡿⠋⠁⠄⠄⢠⣴⣶⣿⣿⣶⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠈⠿⣿⣿⣿⣿",
+  "⣿⣿⡟⠁⠄⠄⠄⠄⣿⣿⣿⣿⣿⣿⣇⡀⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢹⣿⣿⣿",
+  "⣿⣿⣧⠄⠄⠄⠄⢰⣿⣿⣿⣿⣿⣿⣿⡆⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣸⣿⣿⣿",
+  "⣿⣿⣿⣧⡀⠄⠄⢸⣿⣿⣿⣿⣿⣿⣿⣷⣆⠄⠄⠄⠄⠄⠄⠄⠄⣰⣿⣿⣿⣿",
+  "⣿⣿⣿⣿⡿⣦⣀⣾⣿⣟⣉⠉⠙⢛⡏⠁⠄⠄⠄⠄⠄⠄⠄⠄⠚⢿⣿⣿⣿⣿",
+  "⣿⣿⣿⣿⣯⣗⣻⣿⣯⣥⣦⠄⣀⣾⡇⠄⠄⠂⠄⠄⠄⠄⠄⠄⠄⣼⣿⣿⣿⣿",
+  "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠄⠄⠂⠄⠄⠄⠄⠄⠄⠄⣿⣿⣿⣿⣿",
+  "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣟⣻⠋⠄⠄⠄⠄⠄⠄⠄⢀⠄⣸⣿⣿⣿⣿⣿",
+  "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡁⡀⠄⠄⠄⠄⠄⠄⢸⣾⣿⣿⣿⣿⣿⣿",
+  "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣥⣾⣷⠶⠆⠄⠄⠄⢀⠄⠄⠄⠸⣿⣿⣿⣿⣿⣿⣿",
+  "⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⣶⣄⡀⠄⠄⠄⠄⠄⢀⠄⠸⣿⣿⣿⣿⣿⣿",
+  "⣿⣿⣿⣿⣿⣿⠟⠚⣿⣿⡻⠿⠿⠛⠙⠁⠄⠄⠄⠄⠠⠂⠄⠄⠘⠿⣿⣿⣿⣿",
+  "⠿⠛⠉⠁⠁⠄⠄⠄⣻⣿⣿⣧⣠⣀⠄⠄⠄⠄⡀⠂⠄⠄⠄⠄⠄⠄⠈⠉⠿⢿",
+  "⠄⠄⠄⠄⠄⠄⠄⠄⠄⠘⠿⣿⡿⠃⢀⡠⠄⠃⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄",
+];
+
+const bongoArt = [
+  "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣶⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⡤⠾⠋⠀⠙⢦⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⣀⣀⡀⠀⣠⡶⠋⠁⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠶⣤⣀⠀⠀⠀⠀⡄⠀⠀⠀",
+  "⠀⠀⠀⣼⠟⣯⡙⣿⡭⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⡶⠞⠋⣿⠀⠀⠀",
+  "⡀⠀⠀⣿⠉⠻⠀⠈⠀⠀⠀⢾⠆⢀⡀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡟⠀⠀⠀",
+  "⠉⠓⠒⢻⣦⣤⣀⣀⠀⠀⠀⠀⠀⠀⠉⠛⠃⠀⠀⢠⣦⡀⠀⠀⠀⠀⠀⠀⣼⠁⠀⠀⠀",
+  "⠀⣠⠚⠉⠁⠀⠀⠉⠉⠻⢗⠲⠦⢤⣄⣀⡀⠀⠀⠈⠉⠀⠀⠀⠀⠀⠀⠀⠘⣷⠀⠀⠀",
+  "⠀⣧⡀⠀⠀⠀⠀⠀⠀⠀⣸⣧⠶⠒⠚⠛⠛⣻⠂⠀⠀⠀⠀⣀⣀⠀⠀⠀⠀⠸⡇⠀⠀",
+  "⠀⢻⣝⠓⠦⠤⢤⢤⠶⣚⣿⡇⠀⠀⠀⢀⡼⢛⡷⡖⠒⠒⠛⢅⠈⠉⠙⠒⠲⠤⢧⣄⣀",
+  "⠀⠈⣏⠹⡟⠒⢲⠚⠋⡟⢹⣧⡀⠀⠀⠀⠀⠊⠀⠇⠀⠀⠀⠈⡇⠀⠀⠀⠀⠀⠀⠀⠉",
+  "⠀⠀⢸⡄⡇⠀⢸⠀⢠⡇⠘⣷⡙⠢⣄⣀⠀⠀⠀⠀⠀⢀⣠⡾⠁⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⢳⣼⣀⣸⣇⣸⡦⣤⡇⡏⠓⠦⣬⣍⣙⣛⣛⡯⣽⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠈⠙⠛⠛⠁⠀⠈⣿⡇⠀⠀⡟⠀⠀⢀⡏⢠⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢷⣤⣰⠁⠀⢀⣞⣠⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+];
+
+const larpStatements = [
+  // Tech & Linux Elitism
+  "Opening Arch Linux in a crowded library to look busy",
+  "Explaining why I use Vim to someone who is clearly using Google Docs",
+  "Compiling a custom Linux kernel just to see the green text scroll",
+  "Buying a $300 mechanical keyboard with blank keycaps to hide that I still hunt-and-peck",
+  "Changing my GitHub contribution graph with a script to look like a 10x developer",
+  "Installing a tiling window manager just to watch movie trailers in 4 different panes",
+  "Telling people \"I'd use Fedora, but it's too mainstream now\"",
+  // AI & Coding (The \"Modern Engineer\")
+  "Using Cursor to build a \"Hello World\" app and calling myself an AI Architect",
+  "Prompting Claude for 4 hours to avoid writing 5 lines of CSS",
+  "Paying for smallest.ai just to make a 3-second voiceover of a cat",
+  "Telling Gemini to \"think harder\" like I'm its corporate manager",
+  "Wearing Meta glasses to a family dinner to \"record the vibe\" for my personal brand",
+  "Talking about \"Agentic Workflows\" while manually copy-pasting code into a terminal",
+  "Asking a Hackathon judge if they \"get the vision\" instead of showing a working demo",
+  "Claiming I'm \"GPU rich\" because I have a $10 monthly cloud credit",
+  "Putting \"Prompt Engineer\" on my resume after using ChatGPT for a week",
+  "Taking a photo of my laptop screen with v0.dev open to show I'm \"shipping\"",
+  // Grindset & Productivity
+  "Posting a 5 AM workout photo with the caption \"No Excuses\" then going back to sleep",
+  "Setting up a \"Second Brain\" in Notion for 6 hours instead of actually studying for the exam",
+  "Listening to a 3-hour business podcast at 2.5x speed to \"optimize learning\"",
+  "Updating LinkedIn headline to \"Aspiring AI Visionary & Paradigm Shifter\"",
+  "Tweeting \"Huge things coming\" after fixing a single typo in a README",
+  "Reading Marcus Aurelius in the front window of a Starbucks so people see the cover",
+  "Talking about \"leverage\" and \"scaling\" while my biggest asset is a $500 savings account",
+];
+
 const commandHelp = [
   "Available commands:",
   "  help           List available commands",
@@ -58,7 +124,26 @@ const commandHelp = [
   "  pwd            Print working directory",
   "  date           Print current date",
   "  open terminal  Focus terminal",
+  "  icecream       Print ice cream art",
+  "  bongo          Print bongo art",
+  "  cowsay [msg]   Make a cow say something",
+  "  larp           Print a random larp statement",
 ];
+
+function buildCowsay(message: string): string[] {
+  const msg = message || "moo";
+  const border = "-".repeat(msg.length + 2);
+  return [
+    ` ${border}`,
+    `< ${msg} >`,
+    ` ${border}`,
+    "        \\   ^__^",
+    "         \\  (oo)\\_______",
+    "            (__)\\       )\\/\\",
+    "                ||----w |",
+    "                ||     ||",
+  ];
+}
 
 const prompt = "jaygmz@portfolio ~ %";
 
@@ -128,6 +213,15 @@ export default function Terminal({ onOpenWindow, mode }: TerminalProps) {
       output = commandHelp;
     } else if (command === "jayfetch") {
       output = ["", ...jayfetchLines];
+    } else if (command === "icecream") {
+      output = ["", ...icecreamArt];
+    } else if (command === "larp") {
+      output = [larpStatements[Math.floor(Math.random() * larpStatements.length)]];
+    } else if (command === "bongo") {
+      output = ["", ...bongoArt];
+    } else if (command === "cowsay" || command.startsWith("cowsay ")) {
+      const msg = rawCommand.trim().slice("cowsay".length).trim();
+      output = ["", ...buildCowsay(msg)];
     } else if (command === "whoami") {
       output = ["Jc Alleine Gomez - Fullstack · UI"];
     } else if (command === "ls") {
@@ -186,6 +280,7 @@ export default function Terminal({ onOpenWindow, mode }: TerminalProps) {
               id="terminal-input"
               value={input}
               onChange={(event) => setInput(event.target.value)}
+              maxLength={40}
               className="min-w-0 flex-1 bg-transparent text-[#edf6ff] outline-none placeholder:text-[#9aa6b2]"
               placeholder="type help"
               autoComplete="off"
