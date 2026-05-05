@@ -128,6 +128,7 @@ const commandHelp = [
   "  bongo          Print bongo art",
   "  cowsay [msg]   Make a cow say something",
   "  larp           Print a random larp statement",
+  "  guesswhat      Find out",
 ];
 
 function buildCowsay(message: string): string[] {
@@ -222,6 +223,8 @@ export default function Terminal({ onOpenWindow, mode }: TerminalProps) {
     } else if (command === "cowsay" || command.startsWith("cowsay ")) {
       const msg = rawCommand.trim().slice("cowsay".length).trim();
       output = ["", ...buildCowsay(msg)];
+    } else if (command === "guesswhat") {
+      output = ["chicken butt"];
     } else if (command === "whoami") {
       output = ["Jc Alleine Gomez - Fullstack · UI"];
     } else if (command === "ls") {
@@ -263,7 +266,7 @@ export default function Terminal({ onOpenWindow, mode }: TerminalProps) {
   }
 
   return (
-    <div className="flex h-full min-h-90 flex-col bg-[#111827]/90 p-4 font-mono text-[12px] text-[#edf6ff] sm:text-xs">
+    <div className="flex h-full min-h-90 flex-col bg-[#111827]/20 p-4 font-mono text-[12px] text-[#edf6ff] sm:text-xs">
       <div className="min-h-0 flex-1 overflow-auto whitespace-pre leading-5">
         {history.map((line, index) => (
           <p key={`${line}-${index}`} className={line?.startsWith(prompt) ? "text-[#99c1f1]" : "text-[#edf6ff]"}>
