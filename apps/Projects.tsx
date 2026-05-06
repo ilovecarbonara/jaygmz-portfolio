@@ -69,7 +69,7 @@ export default function Projects() {
 				<div className="space-y-3">
 					<div className="flex items-start justify-between gap-4">
 						<div>
-							<p className="font-mono text-xs uppercase tracking-widest text-[#667085]">Personal Project</p>
+							<p className="font-mono text-xs uppercase tracking-widest text-[#667085]">Featured Project</p>
 							<h2 className="mt-2 font-mono text-xl text-[#1f2933]">Oblivio</h2>
 						</div>
 						<span className="rounded-md border border-[#99c1f1] bg-[#eaf4ff] px-2 py-1 font-mono text-xs text-[#1c71d8]">
